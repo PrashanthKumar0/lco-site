@@ -1,0 +1,129 @@
+<html>
+<head>
+<title>fontAwesome cheetsheet by prashanth</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+</head>
+<style>
+body{
+text-align:center;
+color:#fff;
+font-weight:bold;
+font-variant:small-caps;
+padding:10px;
+background:linear-gradient(to top right,#00e371,#0096e5);
+font-size:1.3em;
+}
+i{
+color:#333;
+background:#eee;
+padding:15px;
+margin:0.5px;
+font-size:1.18em;
+width:49%;
+box-sizing:border-box;
+cursor:pointer;
+}
+#container{
+display:block;
+padding:15px;
+border:2px solid rgba(0, 0, 0, 0.13);
+}
+	
+i div{
+color:#009186;
+}
+i:nth-child(odd):hover{
+	background:#333;
+	color:#fff !important;
+}
+i:nth-child(even):hover{
+	background:#ccc;
+	color:#333 !important;
+}
+i:nth-child(odd):hover div{
+		color:white;
+}
+#searchBox {
+	background:#333;
+	width:100vw;
+	position:sticky;
+	top:0px;
+	left:0px;
+	margin-left:-5%;
+	margin-bottom: 20px;
+    margin-top:-1%;
+	z-index: 100;
+	
+}
+#searchBox *{
+ border:none;
+	padding:10px;
+	margin:4%;
+	margin-top:0px;
+	border-radius:10px;
+	
+}
+#searchBox input{
+	width:50%;
+} 
+#searchBox button{
+	width:20%;
+	color:#333;
+	background:#eee;
+}
+</style>
+<div id="searchBox">
+Search A Word <span class="fa fa-search"></span><br>
+<input class="fa fa-search" type="text" placeholder="enter an icon name"><button onclick="findWord(this.parentNode.children[2].value)">find next</button>
+</div>
+<div id="container">
+
+</div>
+<script>
+window.onload=function(){
+var url="css/font-awesome.min.css"
+var r=new XMLHttpRequest();
+
+r.open("GET",url,!0);
+r.send();
+r.onreadystatechange=function(){
+if(this.readyState==4 && this.status==200){
+change(this.responseText);
+}
+}
+}
+
+function change(txt){
+	
+var faNames=txt.match(/fa-[a-z|A-Z|\-|:before]+/gi);
+	
+//console.log(faNames);
+	
+for(var a=0;a<faNames.length;a++){
+	
+faNames[a]=faNames[a].replace(/:before/g,"")
+	
+var elem=document.createElement("i");
+	
+elem.setAttribute("class","fa "+faNames[a]);
+	
+container.appendChild(elem);
+	
+elem.innerHTML+="<div> fa "+faNames[a]+" </div>";
+	
+elem.addEventListener("click",copyTxt);
+}
+}
+function copyTxt(el,txt){
+	console.log(el+" : "+txt);
+	console.log(copyTxt)
+}
+function findWord(w){
+	if(!find(w)){
+	alert("word "+w+" not found")
+	};
+}
+</script>
+
+</html>
